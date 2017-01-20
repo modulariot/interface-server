@@ -47,7 +47,10 @@ def deserialize_device(text):
                   table['type'],
                   table['state'])
 
-DEVICES = []
+DEVICES = [
+    Device(0, DeviceType.Switch, 0),
+    Device(1, DeviceType.Switch, 1),
+]
 
 @api.route('/api/<version>/devices')
 def list_devices():
