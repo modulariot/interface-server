@@ -37,7 +37,7 @@ def serialize_device(device):
     return json.dumps({
         'id' : device.id(),
         'type' : device.type(),
-        'state' : d evice.state()
+        'state' : device.state()
     })
 
 def deserialize_device(text):
