@@ -1,3 +1,4 @@
+import json
 from flask import Flask
 
 API_VERSION = '0.0.1'
@@ -26,6 +27,21 @@ class Device(object):
     def update(self, new_state):
         'Update the state of the device.'
         self.state = new_state
+
+def serialize_device(device):
+    'Convert a device object into JSON.'
+    return json.dumps({
+        'id' : device.id(),
+        'type' : device.type(),
+        'state' : d evice.state()
+    })
+
+def deserialize_device(text):
+    'Convert JSON into a device object.'
+    table = json.loads(text)
+    return Device(table['id'],
+                  table['type'],
+                  table['state'])
 
 if __name__ == '__main__':
     app.run()
