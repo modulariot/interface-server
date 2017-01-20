@@ -9,6 +9,10 @@ app = Flask(__name__)
 def index():
     return 'Hello, world!'
 
+class DeviceType(object):
+    'An enum of device types.'
+    Switch, Radio, Select, Knob = range(4)
+
 class Device(object):
     'A IOT device.'
     def __init__(self, id_number, device_type, state):
