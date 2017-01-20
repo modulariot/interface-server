@@ -43,5 +43,13 @@ def deserialize_device(text):
                   table['type'],
                   table['state'])
 
+DEVICES = []
+
+@api.route('/api/<version>/devices')
+def list_devices():
+    'Return a JSON list of all device objects.'
+    return json.dumps([json.loads(device)
+                       for device in DEVICES])
+
 if __name__ == '__main__':
     app.run()
