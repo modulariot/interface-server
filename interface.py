@@ -52,7 +52,7 @@ DEVICES = [
     Device(1, DeviceType.Switch, 1),
 ]
 
-@api.route('/api/<version>/devices')
+@app.route('/api/<version>/devices')
 def list_devices():
     'Return a JSON list of all device objects.'
     return json.dumps([json.loads(device)
