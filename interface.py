@@ -58,5 +58,16 @@ def list_devices(version):
     return json.dumps([json.loads(serialize_device(device))
                        for device in DEVICES])
 
+@app.route('/api/<version>/devices/<int:id_number>')
+def get_device(version, id_number):
+    'Return the device with the given ID number.'
+    for device in DEVICES:
+        if device.id() == id_number:
+            return serialize_device(device)
+    return json.dumps({
+        'error' : 'id',
+        'message' : 'There was no device with the given ID.',
+    })
+
 if __name__ == '__main__':
     app.run()
