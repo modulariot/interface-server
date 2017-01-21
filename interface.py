@@ -18,7 +18,7 @@ class Device(object):
     def __init__(self, id_number, device_type, state):
         self.id_number = id_number
         self.device_type = device_type
-        self.state = state
+        self._state = state
     def id(self):
         'The unique ID number of the device.'
         return self.id_number
@@ -27,10 +27,10 @@ class Device(object):
         return self.device_type
     def state(self):
         'The current state of the device.'
-        return state
+        return self._state
     def update(self, new_state):
         'Update the state of the device.'
-        self.state = new_state
+        self._state = new_state
 
 def serialize_device(device):
     'Convert a device object into JSON.'
@@ -53,9 +53,9 @@ DEVICES = [
 ]
 
 @app.route('/api/<version>/devices')
-def list_devices():
+def list_devices(version):
     'Return a JSON list of all device objects.'
-    return json.dumps([json.loads(device)
+    return json.dumps([json.loads(serialize_device(device))
                        for device in DEVICES])
 
 if __name__ == '__main__':
