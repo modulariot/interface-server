@@ -69,5 +69,25 @@ def get_device(version, id_number):
         'message' : 'There was no device with the given ID.',
     })
 
+@app.route('/api/<version>/devices/<int:id_number>', methods = ['POST'])
+def update_device(version, id_number):
+    'Update the state of the device with the given ID number.'
+    for device in DEVICES:
+        if device.id() == id_number:
+            if device.state() == DeviceType.Switch:
+                if new_state in ('ON', 'OFF'):
+                    device.update(new_state == 'ON')
+                    return '' #needs to return OKAY
+                else:
+                    return json.dumps({
+                        'error' : 'state',
+                        'message' : 'Switches must be \'ON\' or \'OFF\', but state was \'%s\'.' % (new_state,),
+                    })
+            elif device.state() == DeviceType.Radio:
+                pass
+            elif device.state() == DeviceType.Select:
+                pass
+            elif device.state() == DeviceType.Knob:
+
 if __name__ == '__main__':
     app.run()
