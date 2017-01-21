@@ -52,13 +52,13 @@ DEVICES = [
     Device(1, DeviceType.Switch, 1),
 ]
 
-@app.route('/api/<version>/devices')
+@app.route('/api/<version>/devices', methods = ['GET'])
 def list_devices(version):
     'Return a JSON list of all device objects.'
     return json.dumps([json.loads(serialize_device(device))
                        for device in DEVICES])
 
-@app.route('/api/<version>/devices/<int:id_number>')
+@app.route('/api/<version>/devices/<int:id_number>', methods = ['GET'])
 def get_device(version, id_number):
     'Return the device with the given ID number.'
     for device in DEVICES:
